@@ -1,6 +1,11 @@
 ﻿https://github.com/okovtun/P_418_WIN.git
 https://www.youtube.com/playlist?list=PLeC3gh-CKRG4
 
+TODO:
+1. Сделать COMMIT и PUSH;
+2. Создать ветку 'MyCursor';
+3. На ветке 'MyCursor' загрузить указатель мыши;
+
 DONE:
 1. В Solution 'WinAPI' добавить проект 'ListBox';									DONE
 2. В проекте 'ListBox' реализовать такй же функционал, как в проекте 'ComboBox',	DONE
