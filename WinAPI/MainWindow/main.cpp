@@ -2,6 +2,10 @@
 #include<Windows.h>
 #include<cstdio>
 
+#define IDC_STATIC	1000
+#define IDC_EDIT	1001
+#define IDC_BUTTON	1002
+
 CONST CHAR g_szMyWindowClass[] = "My Window Class";
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -117,7 +121,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			10, 10,
 			500, 25,
 			hwnd,
-			(HMENU)1000,	//
+			(HMENU)IDC_STATIC,	//
 			GetModuleHandle(NULL),	//hInstance
 			NULL
 		);
@@ -132,7 +136,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			10, 38,
 			500, 22,
 			hwnd,
-			(HMENU)1001,
+			(HMENU)IDC_EDIT,
 			GetModuleHandle(NULL),
 			NULL
 		);
@@ -145,7 +149,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			410, 67,
 			100, 32,
 			hwnd,
-			(HMENU)1002,	//Compatibility - ׁמגלוסעטלמסעü;
+			(HMENU)IDC_BUTTON,	//Compatibility - ׁמגלוסעטלמסעü;
 							//Compatible    - ׁמגלוסעטלûי;
 							//Incompatible  - ֽוסמגלוסעטלûי;
 			GetModuleHandle(NULL),
