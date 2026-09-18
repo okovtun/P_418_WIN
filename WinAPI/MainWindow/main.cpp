@@ -56,14 +56,21 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	}
 
 	//2) Создание окна:
+	int screen_width = GetSystemMetrics(SM_CXSCREEN);
+	int screen_height = GetSystemMetrics(SM_CYSCREEN);
+	int window_width = screen_width * 3 / 4;
+	int window_height = screen_height * 3 / 4;
+	int window_start_x = screen_width * 1 / 8;
+	int window_start_y = screen_height * 1 / 8;
+
 	HWND hwnd = CreateWindowEx
 	(
 		NULL,				//exStyle
 		g_szMyWindowClass,	//Class name
 		g_szMyWindowClass,	//Window title
 		WS_OVERLAPPEDWINDOW,//Window style
-		CW_USEDEFAULT, CW_USEDEFAULT,	//Position
-		CW_USEDEFAULT, CW_USEDEFAULT,	//Window size
+		window_start_x, window_start_y,	//Position
+		window_width, window_height,	//Window size
 		NULL,	//Parent Window
 		NULL,	//hMenu. Для главного окна сюда передается ResourceID главного меню.
 				//Для дочернего окна в hMenu передается RESOURCE_ID создаваемого элемента главного окна,
