@@ -3,6 +3,8 @@
 #include"dimentions.h"
 
 CONST CHAR g_szClassName[] = "Calc P_418";
+CONST CHAR* g_OPERATIONS[] = {"+", "-", "*", "/"};
+
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
@@ -104,8 +106,9 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					"Button",
 					sz_digit,
 					WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-					g_i_BUTTON_START_X + (g_i_BUTTON_SIZE + g_i_INTERVAL)*j,
-					g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL)*(2-i/3),
+					//g_i_BUTTON_START_X + (g_i_BUTTON_SIZE + g_i_INTERVAL)*j,
+					//g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL)*(2-i/3),
+					BUTTON_SHIFT_X(j),BUTTON_SHIFT_Y(2-i/3),
 					g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 					hwnd,
 					(HMENU)(IDC_BUTTON_0+i+j),
@@ -124,6 +127,64 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			g_i_BUTTON_DOUBLE_SIZE, g_i_BUTTON_SIZE,
 			hwnd,
 			(HMENU)IDC_BUTTON_0,
+			GetModuleHandle(NULL),
+			NULL
+		);
+		CreateWindowEx
+		(
+			NULL, "Button", ".",
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			BUTTON_SHIFT_X(2), BUTTON_SHIFT_Y(3),
+			g_i_BUTTON_SIZE,g_i_BUTTON_SIZE,
+			hwnd,
+			(HMENU)IDC_BUTTON_POINT,
+			GetModuleHandle(NULL),
+			0
+		);
+		for (int i = 0; i < 4; i++)
+		{
+			CreateWindowEx
+			(
+				NULL, "Button", g_OPERATIONS[3-i],
+				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+				BUTTON_SHIFT_X(3), BUTTON_SHIFT_Y(i),
+				g_i_BUTTON_SIZE,g_i_BUTTON_SIZE,
+				hwnd,
+				(HMENU)(IDC_BUTTON_PLUS + i),
+				GetModuleHandle(NULL),
+				0
+			);
+		}
+		CreateWindowEx
+		(
+			NULL, "Button", "<-",
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			BUTTON_SHIFT_X(4),BUTTON_SHIFT_Y(0),
+			g_i_BUTTON_SIZE,g_i_BUTTON_SIZE,
+			hwnd,
+			(HMENU)IDC_BUTTON_BSP,
+			GetModuleHandle(NULL),
+			NULL
+		);
+		CreateWindowEx
+		(
+			NULL, "Button", "C",
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			BUTTON_SHIFT_X(4), BUTTON_SHIFT_Y(1),
+			g_i_BUTTON_SIZE,g_i_BUTTON_SIZE,
+			hwnd,
+			(HMENU)IDC_BUTTON_CLR,
+			GetModuleHandle(NULL),
+			NULL
+		);
+		CreateWindowEx
+		(
+			NULL, "Button", "=",
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			BUTTON_SHIFT_X(4),BUTTON_SHIFT_Y(2),
+			g_i_BUTTON_SIZE, g_i_BUTTON_DOUBLE_SIZE,
+			hwnd,
+			(HMENU)IDC_BUTTON_EQUAL,
 			GetModuleHandle(NULL),
 			NULL
 		);

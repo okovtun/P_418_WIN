@@ -10,3 +10,6 @@
 #define g_i_START_Y				 10
 #define g_i_BUTTON_START_X		g_i_START_X
 #define g_i_BUTTON_START_Y		g_i_START_Y + g_i_DISPLAY_HEIGHT + g_i_INTERVAL
+
+#define BUTTON_SHIFT_X(n)		g_i_BUTTON_START_X + (g_i_BUTTON_SIZE+g_i_INTERVAL)*(n)
+#define BUTTON_SHIFT_Y(n)		g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE+g_i_INTERVAL)*(n)
