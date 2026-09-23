@@ -195,25 +195,36 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		CHAR sz_display[256] = {};
 		CHAR sz_digit[2] = {};
 		HWND hEditDisplay = GetDlgItem(hwnd, IDC_EDIT_DISPLAY);
-		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
+		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_POINT)
 		{
 			SendMessage(hEditDisplay, WM_GETTEXT, 256, (LPARAM)sz_display);
-			sz_digit[0] = LOWORD(wParam) - IDC_BUTTON_0 + 48;
-
-			if (strcmp(sz_display, "0") == 0)
-				//Функция strcmp(str1, str2) выполняет сравнение двух строк (String Compare)
-				//Если функция вернула '0' - значит строки идентичны, в противном случае - строки разные.
-				//https://legacy.cplusplus.com/reference/cstring/strcmp/
-
-				strcpy(sz_display, sz_digit);
-				//Функция strcpy(str1, str2) выполняет копирование содержимого строки 'str2' в строку 'str1'.
-				//Содержимое строки 'str1' при этом удаляется.
-				//https://legacy.cplusplus.com/reference/cstring/strcpy/
+			if (LOWORD(wParam) == IDC_BUTTON_POINT)
+			{
+				if (strchr(sz_display, '.'))break;
+				//Функция strchr(str, symbol) ищет 'symbol' в строке 'str'.
+				//Если символ найден, функция возвращает указатель на первый найденный символ,
+				//в противном случае - указатель на 0 (nullptr)
+				//https://legacy.cplusplus.com/reference/cstring/strchr/
+				strcat(sz_display, ".");
+			}
 			else
-				strcat(sz_display, sz_digit);
-				//Функция strcat(str1, str2) выполняет конкатенацию строк, то есть, слияние строк,
-				//а именно, к содержимому строки 'str1' добавляет в конец содержимое строки 'str2'.
-				//https://legacy.cplusplus.com/reference/cstring/strcat/
+			{
+				sz_digit[0] = LOWORD(wParam) - IDC_BUTTON_0 + 48;
+				if (strcmp(sz_display, "0") == 0)
+					//Функция strcmp(str1, str2) выполняет сравнение двух строк (String Compare)
+					//Если функция вернула '0' - значит строки идентичны, в противном случае - строки разные.
+					//https://legacy.cplusplus.com/reference/cstring/strcmp/
+
+					strcpy(sz_display, sz_digit);
+					//Функция strcpy(str1, str2) выполняет копирование содержимого строки 'str2' в строку 'str1'.
+					//Содержимое строки 'str1' при этом удаляется.
+					//https://legacy.cplusplus.com/reference/cstring/strcpy/
+				else
+					strcat(sz_display, sz_digit);
+					//Функция strcat(str1, str2) выполняет конкатенацию строк, то есть, слияние строк,
+					//а именно, к содержимому строки 'str1' добавляет в конец содержимое строки 'str2'.
+					//https://legacy.cplusplus.com/reference/cstring/strcat/ 
+			}
 			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
 	}
