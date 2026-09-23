@@ -1,7 +1,7 @@
 ﻿https://github.com/okovtun/P_418_WIN.git
 https://www.youtube.com/playlist?list=PLeC3gh-CKRG4
 
-TODO:
+DONE:
 1. Вычислить размер окна таким образом, чтобы он адаптировался под размер кнопки;
 2. *Окно калькулятора НЕ должно изменяться по размерам;
 

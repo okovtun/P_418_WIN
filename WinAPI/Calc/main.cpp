@@ -1,15 +1,16 @@
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include<Windows.h>
 #include"resource.h"
 #include"dimentions.h"
 
 CONST CHAR g_szClassName[] = "Calc P_418";
-CONST CHAR* g_OPERATIONS[] = {"+", "-", "*", "/"};
+CONST CHAR* g_OPERATIONS[] = { "+", "-", "*", "/" };
 
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
-	//1) ����������� ������ ����:
+	//1) Регистрация класса окна:
 	WNDCLASSEX wClass;
 	ZeroMemory(&wClass, sizeof(wClass));
 
@@ -43,15 +44,15 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 		return 0;
 	}
 
-	//2) �������� ����:
+	//2) Создание окна:
 	HWND hwnd = CreateWindowEx
 	(
 		NULL,				//ExStyle
 		g_szClassName,		//Class name
 		g_szClassName,		//Window title
 		WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME ^ WS_MAXIMIZEBOX,//Style
-		CW_USEDEFAULT,CW_USEDEFAULT,
-		g_i_WINDOW_WIDTH,g_i_WINDOW_HEIGHT,
+		CW_USEDEFAULT, CW_USEDEFAULT,
+		g_i_WINDOW_WIDTH, g_i_WINDOW_HEIGHT,
 		NULL,
 		NULL,
 		hInstance,
@@ -65,7 +66,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	ShowWindow(hwnd, nCmdShow);
 	UpdateWindow(hwnd);
 
-	//3) ������ ����� ���������:
+	//3) Запуск цикла сообщений:
 	MSG msg;
 	while (GetMessage(&msg, 0, 0, 0) > 0)
 	{
@@ -80,13 +81,13 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 	case WM_CREATE:
-		//TODO: ������� ��������� ����
+		//TODO: Создать текстовое поле
 		CreateWindowEx
 		(
 			NULL,
 			"Edit",
-			"0.",
-			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
+			"0",
+			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT | ES_NUMBER,
 			g_i_START_X, g_i_START_Y,
 			g_i_DISPLAY_WIDTH, g_i_DISPLAY_HEIGHT,
 			hwnd,
@@ -108,10 +109,10 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
 					//g_i_BUTTON_START_X + (g_i_BUTTON_SIZE + g_i_INTERVAL)*j,
 					//g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL)*(2-i/3),
-					BUTTON_SHIFT_X(j),BUTTON_SHIFT_Y(2-i/3),
+					BUTTON_SHIFT_X(j), BUTTON_SHIFT_Y(2 - i / 3),
 					g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 					hwnd,
-					(HMENU)(IDC_BUTTON_0+i+j),
+					(HMENU)(IDC_BUTTON_0 + i + j),
 					GetModuleHandle(NULL),
 					NULL
 				);
@@ -123,7 +124,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			"Button",
 			"0",
 			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-			g_i_BUTTON_START_X,g_i_BUTTON_START_Y+(g_i_BUTTON_SIZE+g_i_INTERVAL)*3,
+			g_i_BUTTON_START_X, g_i_BUTTON_START_Y + (g_i_BUTTON_SIZE + g_i_INTERVAL) * 3,
 			g_i_BUTTON_DOUBLE_SIZE, g_i_BUTTON_SIZE,
 			hwnd,
 			(HMENU)IDC_BUTTON_0,
@@ -135,7 +136,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL, "Button", ".",
 			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
 			BUTTON_SHIFT_X(2), BUTTON_SHIFT_Y(3),
-			g_i_BUTTON_SIZE,g_i_BUTTON_SIZE,
+			g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 			hwnd,
 			(HMENU)IDC_BUTTON_POINT,
 			GetModuleHandle(NULL),
@@ -145,10 +146,10 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			CreateWindowEx
 			(
-				NULL, "Button", g_OPERATIONS[3-i],
+				NULL, "Button", g_OPERATIONS[3 - i],
 				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
 				BUTTON_SHIFT_X(3), BUTTON_SHIFT_Y(i),
-				g_i_BUTTON_SIZE,g_i_BUTTON_SIZE,
+				g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 				hwnd,
 				(HMENU)(IDC_BUTTON_PLUS + i),
 				GetModuleHandle(NULL),
@@ -159,8 +160,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		(
 			NULL, "Button", "<-",
 			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-			BUTTON_SHIFT_X(4),BUTTON_SHIFT_Y(0),
-			g_i_BUTTON_SIZE,g_i_BUTTON_SIZE,
+			BUTTON_SHIFT_X(4), BUTTON_SHIFT_Y(0),
+			g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 			hwnd,
 			(HMENU)IDC_BUTTON_BSP,
 			GetModuleHandle(NULL),
@@ -171,7 +172,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL, "Button", "C",
 			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
 			BUTTON_SHIFT_X(4), BUTTON_SHIFT_Y(1),
-			g_i_BUTTON_SIZE,g_i_BUTTON_SIZE,
+			g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 			hwnd,
 			(HMENU)IDC_BUTTON_CLR,
 			GetModuleHandle(NULL),
@@ -181,7 +182,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		(
 			NULL, "Button", "=",
 			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
-			BUTTON_SHIFT_X(4),BUTTON_SHIFT_Y(2),
+			BUTTON_SHIFT_X(4), BUTTON_SHIFT_Y(2),
 			g_i_BUTTON_SIZE, g_i_BUTTON_DOUBLE_SIZE,
 			hwnd,
 			(HMENU)IDC_BUTTON_EQUAL,
@@ -190,7 +191,33 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		);
 		break;
 	case WM_COMMAND:
-		break;
+	{
+		CHAR sz_display[256] = {};
+		CHAR sz_digit[2] = {};
+		HWND hEditDisplay = GetDlgItem(hwnd, IDC_EDIT_DISPLAY);
+		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
+		{
+			SendMessage(hEditDisplay, WM_GETTEXT, 256, (LPARAM)sz_display);
+			sz_digit[0] = LOWORD(wParam) - IDC_BUTTON_0 + 48;
+
+			if (strcmp(sz_display, "0") == 0)
+				//Функция strcmp(str1, str2) выполняет сравнение двух строк (String Compare)
+				//Если функция вернула '0' - значит строки идентичны, в противном случае - строки разные.
+				//https://legacy.cplusplus.com/reference/cstring/strcmp/
+
+				strcpy(sz_display, sz_digit);
+				//Функция strcpy(str1, str2) выполняет копирование содержимого строки 'str2' в строку 'str1'.
+				//Содержимое строки 'str1' при этом удаляется.
+				//https://legacy.cplusplus.com/reference/cstring/strcpy/
+			else
+				strcat(sz_display, sz_digit);
+				//Функция strcat(str1, str2) выполняет конкатенацию строк, то есть, слияние строк,
+				//а именно, к содержимому строки 'str1' добавляет в конец содержимое строки 'str2'.
+				//https://legacy.cplusplus.com/reference/cstring/strcat/
+			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
+		}
+	}
+	break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
