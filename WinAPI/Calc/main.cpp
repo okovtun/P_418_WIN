@@ -259,7 +259,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			SendMessage(hEditDisplay, WM_GETTEXT, 256, (LPARAM)sz_display);
 			if (a == DBL_MIN)a = atof(sz_display);
-			else b = atof(sz_display);
+			else if(input) b = atof(sz_display);
 			input = FALSE;
 
 			operation = LOWORD(wParam);
@@ -269,7 +269,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			SendMessage(hEditDisplay, WM_GETTEXT, 256, (LPARAM)sz_display);
 			if (a == DBL_MIN)a = atof(sz_display);
-			else b = atof(sz_display);
+			else if(input) b = atof(sz_display);
 			input = FALSE;
 			switch (operation)
 			{
