@@ -265,8 +265,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			SendMessage(hEditDisplay, WM_GETTEXT, 256, (LPARAM)sz_display);
 			if (a == DBL_MIN)a = atof(sz_display);
 			else if(input) b = atof(sz_display);
+			if(input)SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0);
 			input = FALSE;
-			SendMessage(hwnd, WM_COMMAND, LOWORD(IDC_BUTTON_EQUAL), 0);
 			operation = LOWORD(wParam);
 			input_operation = TRUE;
 		}
