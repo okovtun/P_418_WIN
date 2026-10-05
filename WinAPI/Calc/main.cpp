@@ -305,6 +305,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			sprintf(sz_display, "%g", a);
 			SendMessage(hEditDisplay, WM_SETTEXT, 0, (LPARAM)sz_display);
 		}
+		SetFocus(hwnd);
 	}
 	break;
 
@@ -430,7 +431,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 		case IDR_METAL_MISTRAL:	SetSkin(hwnd, "metal_mistral");	break;
 		case IDR_SQUARE_BLUE:	SetSkin(hwnd, "square_blue");	break;
-		case IDR_EXIT:	SendMessage(hwnd, WM_CLOSE, 0,0);		break;
+		case IDR_EXIT:	SendMessage(hwnd, WM_CLOSE, 0, 0);		break;
 		}
 
 	}
