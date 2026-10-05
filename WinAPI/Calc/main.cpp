@@ -85,8 +85,9 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 	case WM_CREATE:
+	{
 		//TODO: Создать текстовое поле
-		CreateWindowEx
+		HWND hEdit = CreateWindowEx
 		(
 			NULL,
 			"Edit",
@@ -209,6 +210,21 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		);
 
 		SetSkin(hwnd, "square_blue");
+		HFONT hFont = CreateFont
+		(
+			48, 16,
+			0, 0,
+			500,
+			FALSE, FALSE, FALSE,
+			DEFAULT_CHARSET,
+			OUT_TT_PRECIS,
+			CLIP_CHARACTER_PRECIS,
+			ANTIALIASED_QUALITY,
+			DEFAULT_PITCH,
+			"Tahoma"
+		);
+		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
+	}
 		break;
 	case WM_COMMAND:
 	{
@@ -458,7 +474,7 @@ VOID SetSkin(HWND hwnd, CONST CHAR sz_skin[])
 			GetModuleHandle(NULL),
 			sz_bitmap,
 			IMAGE_BITMAP,
-			i > 0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
+			i >  0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
 			i < 17 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
 			LR_LOADFROMFILE
 		);
