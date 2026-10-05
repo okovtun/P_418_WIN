@@ -4,6 +4,7 @@
 #include<cstdio>
 #include"resource.h"
 #include"dimentions.h"
+#include"ButtonsBMP.h"
 
 CONST CHAR g_szClassName[] = "Calc P_418";
 CONST CHAR* g_OPERATIONS[] = { "+", "-", "*", "/" };
@@ -151,7 +152,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		CreateWindowEx
 		(
 			NULL, "Button", ".",
-			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_BITMAP,
 			BUTTON_SHIFT_X(2), BUTTON_SHIFT_Y(3),
 			g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 			hwnd,
@@ -164,7 +165,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CreateWindowEx
 			(
 				NULL, "Button", g_OPERATIONS[3 - i],
-				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+				WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_BITMAP,
 				BUTTON_SHIFT_X(3), BUTTON_SHIFT_Y(i),
 				g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 				hwnd,
@@ -176,7 +177,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		CreateWindowEx
 		(
 			NULL, "Button", "<-",
-			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_BITMAP,
 			BUTTON_SHIFT_X(4), BUTTON_SHIFT_Y(0),
 			g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 			hwnd,
@@ -187,7 +188,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		CreateWindowEx
 		(
 			NULL, "Button", "C",
-			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_BITMAP,
 			BUTTON_SHIFT_X(4), BUTTON_SHIFT_Y(1),
 			g_i_BUTTON_SIZE, g_i_BUTTON_SIZE,
 			hwnd,
@@ -198,7 +199,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		CreateWindowEx
 		(
 			NULL, "Button", "=",
-			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_BITMAP,
 			BUTTON_SHIFT_X(4), BUTTON_SHIFT_Y(2),
 			g_i_BUTTON_SIZE, g_i_BUTTON_DOUBLE_SIZE,
 			hwnd,
@@ -416,7 +417,21 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 VOID SetSkin(HWND hwnd, CONST CHAR sz_skin[])
 {
 	CHAR sz_bitmap[256] = {};
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i <= 17; i++)
+	{
+		sprintf(sz_bitmap, "BMP\\%s\\%s", sz_skin, g_ButtonsBMP[i]);
+		HBITMAP hBitmap = (HBITMAP)LoadImage
+		(
+			GetModuleHandle(NULL),
+			sz_bitmap,
+			IMAGE_BITMAP,
+			i > 0  ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
+			i < 17 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
+			LR_LOADFROMFILE
+		);
+		SendMessage(GetDlgItem(hwnd, IDC_BUTTON_0 + i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBitmap);
+	}
+	/*for (int i = 0; i < 10; i++)
 	{
 		sprintf(sz_bitmap, "BMP\\%s\\button_%i.bmp", sz_skin, i);
 		HBITMAP hBitmap = (HBITMAP)LoadImage
@@ -429,5 +444,5 @@ VOID SetSkin(HWND hwnd, CONST CHAR sz_skin[])
 			LR_LOADFROMFILE
 		);
 		SendMessage(GetDlgItem(hwnd, IDC_BUTTON_0 + i), BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBitmap);
-	}
+	}*/
 }
