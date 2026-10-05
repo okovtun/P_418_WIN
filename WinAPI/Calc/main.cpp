@@ -307,6 +307,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 	}
 	break;
+
 	case WM_KEYDOWN:
 	{
 		if (GetKeyState(VK_SHIFT) < 0 && wParam == 0x38)
@@ -345,6 +346,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 	}
 	break;
+
 	case WM_KEYUP:
 	{
 		if (GetKeyState(VK_SHIFT) < 0 && wParam == 0x38)
@@ -404,6 +406,36 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	break;
 
+	case WM_CONTEXTMENU:
+	{
+		//Сообщение WM_CONTEXTMENU отправляется в окно, когда пользователь нажимает правую кнопку мыши на этом окне.
+		//MessageBox(hwnd, "Вы нажали правую кнопку мыши", "WM_CONTEXTMENU", MB_OK | MB_ICONINFORMATION);
+		HMENU hMenu = CreatePopupMenu();
+		InsertMenu(hMenu, 0, MF_BYPOSITION | MF_STRING, IDR_EXIT, "Exit");
+		InsertMenu(hMenu, 0, MF_BYPOSITION | MF_STRING, IDR_SQUARE_BLUE, "Square blue");
+		InsertMenu(hMenu, 0, MF_BYPOSITION | MF_STRING, IDR_METAL_MISTRAL, "Metal mistral");
+
+		INT item = TrackPopupMenu
+		(
+			hMenu,
+			
+			TPM_RIGHTALIGN | TPM_BOTTOMALIGN | TPM_RETURNCMD | TPM_HORNEGANIMATION | TPM_VERNEGANIMATION,
+			LOWORD(lParam),HIWORD(lParam),
+			NULL,
+			hwnd,
+			NULL
+		);
+		DestroyMenu(hMenu);
+		switch (item)
+		{
+		case IDR_METAL_MISTRAL:	SetSkin(hwnd, "metal_mistral");	break;
+		case IDR_SQUARE_BLUE:	SetSkin(hwnd, "square_blue");	break;
+		case IDR_EXIT:	SendMessage(hwnd, WM_CLOSE, 0,0);		break;
+		}
+
+	}
+	break;
+
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
@@ -425,7 +457,7 @@ VOID SetSkin(HWND hwnd, CONST CHAR sz_skin[])
 			GetModuleHandle(NULL),
 			sz_bitmap,
 			IMAGE_BITMAP,
-			i > 0  ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
+			i > 0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
 			i < 17 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
 			LR_LOADFROMFILE
 		);
