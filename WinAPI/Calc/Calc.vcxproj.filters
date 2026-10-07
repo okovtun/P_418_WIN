@@ -29,7 +29,7 @@
     <ClInclude Include="ButtonsBMP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="colors.h">
+    <ClInclude Include="Skins.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

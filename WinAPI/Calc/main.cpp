@@ -5,6 +5,7 @@
 #include"resource.h"
 #include"dimentions.h"
 #include"ButtonsBMP.h"
+#include"Skins.h"
 
 CONST CHAR g_szClassName[] = "Calc P_418";
 CONST CHAR* g_OPERATIONS[] = { "+", "-", "*", "/" };
@@ -82,6 +83,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	static INT index = 0;
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -230,11 +232,11 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			HDC hdc = (HDC)wParam;
 			SetBkMode(hdc, OPAQUE);
-			SetBkColor(hdc, RGB(0, 0, 100));
-			HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 255));
-			SetTextColor(hdc, RGB(255, 0, 0));
+			SetBkColor(hdc, g_DISPLAY_BACKGROUND_COLOR[index]);
+			HBRUSH hBrush = CreateSolidBrush(g_DISPLAY_FOREGROUND_COLOR[index]);
+			SetTextColor(hdc, g_DISPLAY_FOREGROUND_COLOR[index]);
 
-			HBRUSH hbrBackground = CreateSolidBrush(RGB(0, 0, 200));
+			HBRUSH hbrBackground = CreateSolidBrush(g_WINDOW_BACKGROUND_COLOR[index]);
 			SetClassLongPtr(hwnd, GCLP_HBRBACKGROUND, (LONG)hbrBackground);
 			SendMessage(hwnd, WM_ERASEBKGND, wParam, 0);
 
@@ -460,11 +462,18 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		DestroyMenu(hMenu);
 		switch (item)
 		{
-		case IDR_METAL_MISTRAL:	SetSkin(hwnd, "metal_mistral");	break;
-		case IDR_SQUARE_BLUE:	SetSkin(hwnd, "square_blue");	break;
+		//case IDR_METAL_MISTRAL:	SetSkin(hwnd, "metal_mistral");	break;
+		//case IDR_SQUARE_BLUE:	SetSkin(hwnd, "square_blue");	break;
 		case IDR_EXIT:	SendMessage(hwnd, WM_CLOSE, 0, 0);		break;
 		}
+		index = item - IDR_SQUARE_BLUE;
+		SetSkin(hwnd, g_SKINS[index]);
 
+		HWND hEditDisplay = GetDlgItem(hwnd, IDC_EDIT_DISPLAY);
+		HDC hdcDisplay = GetDC(hEditDisplay);
+		SendMessage(hwnd, WM_CTLCOLOREDIT, (WPARAM)hdcDisplay, 0);
+		ReleaseDC(hEditDisplay, hdcDisplay);
+		SetFocus(hEditDisplay);
 	}
 	break;
 
