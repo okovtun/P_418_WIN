@@ -3,6 +3,8 @@ https://www.youtube.com/playlist?list=PLeC3gh-CKRG4
 
 TODO:
 1. Добавить цветовую схему для своей темы;
+2. Иконки кнопок должны подгружаться не с файлов на диске, а с DLL-файла:
+	https://learn.microsoft.com/en-us/cpp/build/creating-a-resource-only-dll?view=msvc-170
 
 DONE:
 1. Нарисовать свою тему с кнопками и внедрить ее в калькулятор, включая контекстное меню;
