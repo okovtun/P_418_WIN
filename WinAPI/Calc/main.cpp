@@ -212,9 +212,10 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		);
 
 		SetSkin(hwnd, "square_blue");
+		AddFontResourceEx("Fonts\\digital-7 (mono).ttf", FR_PRIVATE, 0);
 		HFONT hFont = CreateFont
 		(
-			48, 16,
+			g_i_FONT_HEIGHT, g_i_FONT_WIDTH,
 			0, 0,
 			500,
 			FALSE, FALSE, FALSE,
@@ -223,26 +224,27 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CLIP_CHARACTER_PRECIS,
 			ANTIALIASED_QUALITY,
 			DEFAULT_PITCH,
-			"Tahoma"
+			"Digital-7 Mono"
+			//"Tahoma"
 		);
 		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
 	}
-		break;
-		case WM_CTLCOLOREDIT:
-		{
-			HDC hdc = (HDC)wParam;
-			SetBkMode(hdc, OPAQUE);
-			SetBkColor(hdc, g_DISPLAY_BACKGROUND_COLOR[index]);
-			HBRUSH hBrush = CreateSolidBrush(g_DISPLAY_FOREGROUND_COLOR[index]);
-			SetTextColor(hdc, g_DISPLAY_FOREGROUND_COLOR[index]);
+	break;
+	case WM_CTLCOLOREDIT:
+	{
+		HDC hdc = (HDC)wParam;
+		SetBkMode(hdc, OPAQUE);
+		SetBkColor(hdc, g_DISPLAY_BACKGROUND_COLOR[index]);
+		HBRUSH hBrush = CreateSolidBrush(g_DISPLAY_FOREGROUND_COLOR[index]);
+		SetTextColor(hdc, g_DISPLAY_FOREGROUND_COLOR[index]);
 
-			HBRUSH hbrBackground = CreateSolidBrush(g_WINDOW_BACKGROUND_COLOR[index]);
-			SetClassLongPtr(hwnd, GCLP_HBRBACKGROUND, (LONG)hbrBackground);
-			SendMessage(hwnd, WM_ERASEBKGND, wParam, 0);
+		HBRUSH hbrBackground = CreateSolidBrush(g_WINDOW_BACKGROUND_COLOR[index]);
+		SetClassLongPtr(hwnd, GCLP_HBRBACKGROUND, (LONG)hbrBackground);
+		SendMessage(hwnd, WM_ERASEBKGND, wParam, 0);
 
-			return (LRESULT)hBrush;
-		}
-			break;
+		return (LRESULT)hBrush;
+	}
+	break;
 	case WM_COMMAND:
 	{
 		static DOUBLE a = DBL_MIN;
@@ -452,9 +454,9 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		INT item = TrackPopupMenu
 		(
 			hMenu,
-			
+
 			TPM_RIGHTALIGN | TPM_BOTTOMALIGN | TPM_RETURNCMD | TPM_HORNEGANIMATION | TPM_VERNEGANIMATION,
-			LOWORD(lParam),HIWORD(lParam),
+			LOWORD(lParam), HIWORD(lParam),
 			NULL,
 			hwnd,
 			NULL
@@ -462,8 +464,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		DestroyMenu(hMenu);
 		switch (item)
 		{
-		//case IDR_METAL_MISTRAL:	SetSkin(hwnd, "metal_mistral");	break;
-		//case IDR_SQUARE_BLUE:	SetSkin(hwnd, "square_blue");	break;
+			//case IDR_METAL_MISTRAL:	SetSkin(hwnd, "metal_mistral");	break;
+			//case IDR_SQUARE_BLUE:	SetSkin(hwnd, "square_blue");	break;
 		case IDR_EXIT:	SendMessage(hwnd, WM_CLOSE, 0, 0);		break;
 		}
 		index = item - IDR_SQUARE_BLUE;
@@ -498,7 +500,7 @@ VOID SetSkin(HWND hwnd, CONST CHAR sz_skin[])
 			GetModuleHandle(NULL),
 			sz_bitmap,
 			IMAGE_BITMAP,
-			i >  0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
+			i > 0 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
 			i < 17 ? g_i_BUTTON_SIZE : g_i_BUTTON_DOUBLE_SIZE,
 			LR_LOADFROMFILE
 		);
