@@ -226,6 +226,21 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
 	}
 		break;
+		case WM_CTLCOLOREDIT:
+		{
+			HDC hdc = (HDC)wParam;
+			SetBkMode(hdc, OPAQUE);
+			SetBkColor(hdc, RGB(0, 0, 100));
+			HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 255));
+			SetTextColor(hdc, RGB(255, 0, 0));
+
+			HBRUSH hbrBackground = CreateSolidBrush(RGB(0, 0, 200));
+			SetClassLongPtr(hwnd, GCLP_HBRBACKGROUND, (LONG)hbrBackground);
+			SendMessage(hwnd, WM_ERASEBKGND, wParam, 0);
+
+			return (LRESULT)hBrush;
+		}
+			break;
 	case WM_COMMAND:
 	{
 		static DOUBLE a = DBL_MIN;
