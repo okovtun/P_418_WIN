@@ -2,6 +2,10 @@
 https://www.youtube.com/playlist?list=PLeC3gh-CKRG4
 
 TODO:
+1. В установленном калькуляторе должен отображаться значек на ярлыках;
+2. В установленный калькулятор должны подгружаться шрифты;
+
+DONE:
 1. Добавить цветовую схему для своей темы;
 2. Иконки кнопок должны подгружаться не с файлов на диске, а с DLL-файла:
 	https://learn.microsoft.com/en-us/cpp/build/creating-a-resource-only-dll?view=msvc-170
