@@ -47,6 +47,7 @@
 			this.labelTime.TabIndex = 0;
 			this.labelTime.Text = "Current time";
 			this.labelTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelTime.DoubleClick += new System.EventHandler(this.labelTime_DoubleClick);
 			// 
 			// timer
 			// 
