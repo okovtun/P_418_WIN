@@ -21,6 +21,7 @@ namespace Clock
 				Screen.PrimaryScreen.Bounds.Right - this.Width - 50,
 				Screen.PrimaryScreen.Bounds.Bottom / 20
 			);
+			SetVisibility(false);
 		}
 
 		//			Methods:
