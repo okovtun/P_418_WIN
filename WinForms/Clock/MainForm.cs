@@ -58,5 +58,10 @@ namespace Clock
 		private void cbShowDate_CheckedChanged(object sender, EventArgs e) => tsmiShowDate.Checked = cbShowDate.Checked;
 
 		private void cbShowWeekday_CheckedChanged(object sender, EventArgs e) => tsmiShowWeekday.Checked = cbShowWeekday.Checked;
+
+		private void tsmiExit_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 	}
 }

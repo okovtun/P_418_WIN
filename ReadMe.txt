@@ -2,7 +2,7 @@
 https://www.youtube.com/playlist?list=PLeC3gh-CKRG4
 
 TODO:
-1. Реализовать пункт меню 'Exit';
+1. Реализовать пункт меню 'Exit';		DONE
 2. В системном трее должна отображаться иконка часов;
 
 DONE:
