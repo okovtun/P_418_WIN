@@ -63,5 +63,14 @@ namespace Clock
 		{
 			this.Close();
 		}
+
+		private void notifyIcon_DoubleClick(object sender, EventArgs e)
+		{
+			if (this.TopMost == false)
+			{
+				this.TopMost = true;
+				this.TopMost = false;
+			}
+		}
 	}
 }
