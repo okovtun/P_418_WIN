@@ -14,11 +14,13 @@ namespace Clock
 	{
 		ColorDialog backgroundColorDialog;
 		ColorDialog foregroundColorDialog;
+		FontDialog fontDialog;
 		public MainForm()
 		{
 			InitializeComponent();
 			backgroundColorDialog = new ColorDialog();
 			foregroundColorDialog = new ColorDialog();
+			fontDialog = new FontDialog();
 
 			this.Location = new Point
 			(
@@ -88,6 +90,11 @@ namespace Clock
 		{
 			if (foregroundColorDialog.ShowDialog() == DialogResult.OK)
 				labelTime.ForeColor = foregroundColorDialog.Color;
+		}
+
+		private void tsmiFont_Click(object sender, EventArgs e)
+		{
+			if (fontDialog.ShowDialog() == DialogResult.OK) ;
 		}
 	}
 }
