@@ -44,6 +44,7 @@
 			this.comboBoxFont.Name = "comboBoxFont";
 			this.comboBoxFont.Size = new System.Drawing.Size(412, 21);
 			this.comboBoxFont.TabIndex = 0;
+			this.comboBoxFont.SelectionChangeCommitted += new System.EventHandler(this.comboBoxFont_SelectionChangeCommitted);
 			// 
 			// counterFontSize
 			// 
@@ -56,6 +57,7 @@
             0,
             0,
             0});
+			this.counterFontSize.ValueChanged += new System.EventHandler(this.counterFontSize_ValueChanged);
 			// 
 			// labelExample
 			// 
