@@ -104,6 +104,7 @@
 			this.MaximizeBox = false;
 			this.Name = "FontDialog";
 			this.Text = "FontDialog";
+			this.Load += new System.EventHandler(this.FontDialog_Load);
 			((System.ComponentModel.ISupportInitialize)(this.counterFontSize)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
