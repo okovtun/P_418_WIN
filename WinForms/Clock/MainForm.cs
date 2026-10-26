@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Clock
 {
@@ -18,6 +19,7 @@ namespace Clock
 		public MainForm()
 		{
 			InitializeComponent();
+			AllocConsole();
 			backgroundColorDialog = new ColorDialog();
 			foregroundColorDialog = new ColorDialog();
 			fontDialog = new FontDialog();
@@ -29,6 +31,8 @@ namespace Clock
 			);
 			SetVisibility(false);
 		}
+		[DllImport("kernel32.dll")]
+		public static extern bool AllocConsole();
 
 		//			Methods:
 		void SetVisibility(bool visible)
