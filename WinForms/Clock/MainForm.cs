@@ -20,15 +20,15 @@ namespace Clock
 		{
 			InitializeComponent();
 			AllocConsole();
-			backgroundColorDialog = new ColorDialog();
-			foregroundColorDialog = new ColorDialog();
-			fontDialog = new FontDialog();
-
 			this.Location = new Point
 			(
 				Screen.PrimaryScreen.Bounds.Right - this.Width - 50,
 				Screen.PrimaryScreen.Bounds.Bottom / 20
 			);
+			backgroundColorDialog = new ColorDialog();
+			foregroundColorDialog = new ColorDialog();
+			fontDialog = new FontDialog(this);
+
 			SetVisibility(false);
 		}
 		[DllImport("kernel32.dll")]

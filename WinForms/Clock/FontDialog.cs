@@ -27,6 +27,15 @@ namespace Clock
 			LoadFonts("*.otf");
 			comboBoxFont.SelectedIndex = 0;
 		}
+		public FontDialog(Form parentWindow) : this()
+		{
+			this.StartPosition = FormStartPosition.Manual;
+			this.Location = new Point
+			(
+				parentWindow.Location.X - this.Width/4,
+				parentWindow.Location.Y + 128
+			);
+		}
 		void LoadFonts(string pattern)
 		{
 			string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), pattern);
