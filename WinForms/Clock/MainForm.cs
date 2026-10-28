@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,7 @@ namespace Clock
 			foregroundColorDialog = new ColorDialog();
 			fontDialog = new FontDialog(this);
 
+			LoadSettings();
 			SetVisibility(false);
 		}
 		[DllImport("kernel32.dll")]
@@ -56,8 +58,8 @@ namespace Clock
 			writer.WriteLine(tsmiShowDate.Checked);
 			writer.WriteLine(tsmiShowWeekday.Checked);
 			writer.WriteLine(fontDialog.Filename);
-			writer.WriteLine(backgroundColorDialog.Color.ToArgb());
-			writer.WriteLine(foregroundColorDialog.Color.ToArgb());
+			writer.WriteLine(labelTime.BackColor.ToArgb());
+			writer.WriteLine(labelTime.ForeColor.ToArgb());
 			writer.Close();
 			Process.Start("notepad", filename);
 		}
@@ -70,6 +72,14 @@ namespace Clock
 			tsmiShowControls.Checked	= bool.Parse(reader.ReadLine());
 			tsmiShowDate.Checked		= bool.Parse(reader.ReadLine());
 			tsmiShowWeekday.Checked		= bool.Parse(reader.ReadLine());
+
+			fontDialog.Filename = reader.ReadLine();
+			PrivateFontCollection pfc = new PrivateFontCollection();
+			pfc.AddFontFile($"{Application.ExecutablePath}\\..\\..\\..\\Fonts\\{fontDialog.Filename}");
+			fontDialog.Font = labelTime.Font = new Font(pfc.Families[0], 32);
+
+			backgroundColorDialog.Color = labelTime.BackColor = Color.FromArgb(Convert.ToInt32(reader.ReadLine()));
+			foregroundColorDialog.Color = labelTime.ForeColor = Color.FromArgb(Convert.ToInt32(reader.ReadLine()));
 
 			reader.Close();
 			Process.Start("notepad", filename);
